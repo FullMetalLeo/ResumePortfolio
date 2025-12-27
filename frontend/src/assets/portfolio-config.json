@@ -1,0 +1,32 @@
+{
+    "personalInfo": {
+        "name": "Sam Banner",
+        "title": "Full Stack Developer | Cyberpunk Enthusiast",
+        "email": "contact@sambanner.dev",
+        "location": "New York, USA"
+    },
+    "links": [
+        {
+            "label": "Resume",
+            "url": "https://example.com/resume.pdf",
+            "icon": "description"
+        },
+        {
+            "label": "GitHub",
+            "url": "https://github.com/FullMetalLeo",
+            "icon": "code"
+        },
+        {
+            "label": "LinkedIn",
+            "url": "https://linkedin.com/in/sambanner",
+            "icon": "business"
+        },
+        {
+            "label": "Twitter",
+            "url": "https://twitter.com/sambanner",
+            "icon": "chat"
+        }
+    ],
+    "about": "Constructing digital architectures in a chaotic world. Functional, minimalistic, and always online.",
+    "projects": []
+}

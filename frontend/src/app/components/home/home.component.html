@@ -1,0 +1,122 @@
+<div class="min-h-screen bg-cyber-black text-gray-300 font-mono pb-20">
+
+    <!-- Header / Profile Section -->
+    <header class="glass-panel border-b border-gray-800 p-6 mb-8 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-4xl font-bold text-white mb-2 glow-text-cyan">{{ config?.personalInfo?.name }}</h1>
+                <p class="text-cyber-neon">{{ config?.personalInfo?.title }}</p>
+            </div>
+            <div class="text-right hidden md:block">
+                <p class="text-gray-400">{{ config?.personalInfo?.location }}</p>
+                <p class="text-cyber-pink">{{ config?.personalInfo?.email }}</p>
+            </div>
+            <button (click)="logout()"
+                class="md:hidden text-red-500 border border-red-500 px-3 py-1 rounded hover:bg-red-500 hover:text-white transition">
+                LOGOUT
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- Left Column: Config Info & Links -->
+        <div class="md:col-span-1 space-y-6">
+
+            <!-- About Card -->
+            <div class="glass-panel p-6 rounded-lg border-l-4 border-cyber-yellow">
+                <h3 class="text-xl font-bold text-white mb-4 border-b border-gray-700 pb-2">/usr/bin/about</h3>
+                <p class="leading-relaxed text-sm text-gray-400">
+                    {{ config?.about }}
+                </p>
+            </div>
+
+            <!-- Links Card -->
+            <div class="glass-panel p-6 rounded-lg border-l-4 border-cyber-pink">
+                <h3 class="text-xl font-bold text-white mb-4 border-b border-gray-700 pb-2">/net/links</h3>
+                <div class="flex flex-col space-y-3">
+                    <a *ngFor="let link of config?.links" [href]="link.url" target="_blank"
+                        class="flex items-center group hover:bg-cyber-gray p-2 rounded transition-colors cursor-pointer">
+                        <span
+                            class="material-icons text-cyber-neon mr-3 group-hover:shadow-[0_0_5px_#00f3ff] transition-shadow">
+                            {{ link.icon || 'link' }}
+                        </span>
+                        <span class="group-hover:text-white transition-colors">{{ link.label }}</span>
+                        <span class="flex-grow"></span>
+                        <span class="text-xs text-gray-600 group-hover:text-cyber-neon">>></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Admin Actions (Only if admin) -->
+            <div *ngIf="isAdmin" class="glass-panel p-6 rounded-lg border-l-4 border-red-500">
+                <h3 class="text-xl font-bold text-red-500 mb-4">Admin Console</h3>
+                <p class="text-xs text-gray-500 mb-4">Edit configuration in codebase to update portfolio.</p>
+                <div class="text-xs font-mono bg-black p-2 rounded text-green-500">
+                    $ nano src/assets/portfolio-config.json
+                </div>
+            </div>
+
+            <button (click)="logout()"
+                class="w-full hidden md:block border border-red-900 text-red-500 py-3 rounded hover:bg-red-900/20 transition">
+                TERMINATE SESSION
+            </button>
+
+        </div>
+
+        <!-- Right Column: Projects & Comments -->
+        <div class="md:col-span-2 space-y-8">
+
+            <!-- Request Collaboration Form -->
+            <div class="glass-panel p-6 rounded-lg relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-20 h-20 bg-cyber-pink blur-[80px] opacity-20"></div>
+                <h3 class="text-2xl font-bold text-white mb-6">Initiate Protocol: Collaboration</h3>
+
+                <form (ngSubmit)="submitCollab()" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Entity Name"
+                            class="bg-cyber-dark border border-gray-700 p-3 rounded text-white focus:border-cyber-neon outline-none">
+                        <input type="email" placeholder="Contact Frequency (Email)"
+                            class="bg-cyber-dark border border-gray-700 p-3 rounded text-white focus:border-cyber-neon outline-none">
+                    </div>
+                    <textarea rows="3" placeholder="Mission Parameters"
+                        class="w-full bg-cyber-dark border border-gray-700 p-3 rounded text-white focus:border-cyber-neon outline-none"></textarea>
+                    <button
+                        class="bg-cyber-neon text-black font-bold py-2 px-6 rounded hover:shadow-[0_0_15px_#00f3ff] transition-shadow">
+                        TRANSMIT DATA
+                    </button>
+                </form>
+            </div>
+
+            <!-- Anonymous Comments -->
+            <div class="space-y-4">
+                <h3 class="text-2xl text-white font-bold flex items-center">
+                    <span class="w-2 h-8 bg-cyber-yellow mr-3"></span>
+                    Guest Log
+                </h3>
+
+                <!-- Comment Input -->
+                <div class="glass-panel p-4 rounded flex gap-4">
+                    <input [(ngModel)]="newComment" (keyup.enter)="postComment()" type="text"
+                        class="flex-grow bg-transparent border-b border-gray-700 text-white focus:border-cyber-neon outline-none py-2 font-mono"
+                        placeholder="Leave an anonymous trace...">
+                    <button (click)="postComment()" class="text-cyber-neon hover:text-white transition">
+                        ENTER
+                    </button>
+                </div>
+
+                <!-- Comment Feed -->
+                <div class="space-y-3">
+                    <div *ngFor="let comment of comments"
+                        class="glass-panel p-4 rounded border-l-2 border-gray-700 hover:border-cyber-neon transition-colors">
+                        <p class="text-gray-300">{{ comment.text }}</p>
+                        <p class="text-xs text-gray-600 mt-2 text-right">{{ comment.timestamp || 'Just now' |
+                            date:'short' }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+</div>

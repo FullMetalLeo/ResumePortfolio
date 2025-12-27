@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cyberpunk Minimalist Global Styles */
+body {
+    background-color: #0a0a0a; /* Deep dark background */
+    color: #e0e0e0; /* Off-white text */
+    font-family: 'Courier New', Courier, monospace; /* Tech/Code font */
+}
+
+/* Glassmorphism Utility Class */
+.glass-panel {
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Neon Glow Utilities */
+.glow-text-cyan {
+    text-shadow: 0 0 5px #00f3ff, 0 0 10px #00f3ff;
+}
+.glow-border-cyan {
+    box-shadow: 0 0 5px #00f3ff;
+    border-color: #00f3ff;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+    background: #333; 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #00f3ff;
+}
